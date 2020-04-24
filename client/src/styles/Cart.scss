@@ -1,0 +1,248 @@
+h4 {
+    text-align: center;
+}
+
+.titles-cart {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+
+    p {
+        font-size: 1rem;
+        padding-bottom: 1rem;
+
+        @media screen and (min-width: 470px) {
+            font-size: 1.1rem;
+        }
+    }
+}
+
+.remove-item {
+    color: red;
+    font-size: 1.1rem;
+    cursor: pointer;
+    
+    @media screen and (min-width: 470px) {
+        font-size: 1.5rem;
+    }
+}
+
+.total-cart {
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 1rem 0;
+    font-weight: 600;
+}
+
+.item-in-cart {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+
+    @media screen and (min-width: 470px) {
+        font-size: 1.5rem;
+    }
+}
+
+.cart-bk {
+    width: 100%;
+    min-height: 120vh;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    font-family: 'Josefin Sans', sans-serif;
+    
+    @media screen and (min-width: 1200px) {
+        padding: 1rem 8rem 10rem;
+    }
+}
+
+.section-cart {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 20vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 920px) {
+        padding: 1rem 10rem 5rem;
+    }
+}
+
+.overview {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    margin: 1rem auto 1rem;
+
+    .underscore {
+        width: calc(100% - 280px);
+        height: 1rem;
+        border-bottom: 1px dotted grey;
+    }
+}
+
+.registration {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        margin: 1rem;
+    }
+}
+
+.registration-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    .username,
+    .userpassword {
+        width: 47%;
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: -22px;
+            left: 5px;
+        }
+    }
+
+    .username:after {
+        content: 'USERNAME'
+    }
+    .userpassword:after {
+        content: 'PASSWORD'
+    }
+}
+
+.login-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    input {
+        width: 16rem;
+        margin: 1rem 0;
+    }
+}
+
+form {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(4, 1fr);
+    grid-gap: 2rem 1rem;
+    padding: 1rem 1rem 2rem;
+    margin: 1rem 0;
+
+    @media screen and (min-width: 470px) {
+        grid-gap: 2rem;
+    }
+
+    input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-bottom: 1px solid rgb(145, 145, 145);
+        padding: 0.3rem;
+        font-size: 1rem;
+
+        @media screen and (min-width: 470px) {
+                font-size: 1.1rem;
+        }
+
+        &::placeholder {
+            color: rgba(90, 90, 90, 0.5);
+            font-family: 'Josefin Sans', sans-serif;
+            text-transform: uppercase;
+
+            @media screen and (min-width: 470px) {
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    label {
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: -22px;
+            left: 5px;
+        }
+    }
+
+    .first-name {
+        grid-area: 1/1/2/3;
+
+        &:after {
+            content: 'NAME';
+        }
+    }
+
+    .second-name {
+        grid-area: 1/3/2/5;
+
+        &:after {
+            content: 'SURNAME';
+        }  
+    }
+
+    .address {
+        grid-area: 2/1/3/3;
+
+        &:after {
+            content: 'ADDRESS';
+        }  
+    }
+
+    .address-nr {
+        grid-area: 2/3/3/4;
+
+        &:after {
+            content: 'NR.';
+        }  
+    }
+
+    .address-post {
+        grid-area: 2/4/3/5;
+
+        &:after {
+            content: 'ZIP';
+        }  
+    }
+
+    .submit-btn {
+        grid-area: 3/2/-1/4;
+        
+        #submit-btn {
+            position: relative;
+            top: 1rem;
+
+            &:active {
+                position: relative;
+                top: calc(1rem + 2px);
+                box-shadow: none;
+                background-color: rgb(160, 45, 0);
+            }
+        }
+    }
+}

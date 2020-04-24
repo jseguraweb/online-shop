@@ -1,0 +1,29 @@
+.glasses-bk {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.logo-red {
+    color: rgb(226, 0, 38);
+}
+
+.section-glasses {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 20vh;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(270px, 1fr) );
+    grid-gap: 2rem;
+
+    @media screen and (min-width: 920px) {
+        padding: 1rem 10rem 5rem;
+    }
+}
