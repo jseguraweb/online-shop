@@ -1,5 +1,12 @@
-const getSunGlasses = (req, res, next) => {
-    res.send('This is the sunglasses page');
+const Product = require('../models/product');
+
+const getSunGlasses = async (req, res, next) => {
+    try {
+        const sunglasses = await Product.find({ type: "sun" });
+        res.json({ success: true, eyeglasses: sunglasses });
+    } catch (error) {
+        next(error);
+    }
 };
 
 const getInfoSunGlasses = (req, res, next) => {
