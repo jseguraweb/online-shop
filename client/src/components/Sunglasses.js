@@ -8,7 +8,7 @@ import MiniCart from './MiniCart';
 
 const Sunglasses = () => {
 
-    const { glasses, setTotal, setCart } = useContext(ContextTotal)
+    const { products, setTotal, setCart } = useContext(ContextTotal)
     const addToCart = (e, item) => {
         e.preventDefault();
         const data = item;
@@ -31,7 +31,7 @@ const Sunglasses = () => {
     };
 
 
-    const allSunglasses = glasses.filter(el => el.type === 'sun').map(el => <Item key={el._id} properties={el} addToCart={addToCart} />);
+    const allSunglasses = products.filter(el => el.type === 'sun').map(el => <Item key={el._id} properties={el} addToCart={addToCart} />);
 
 
     // console.log('allsunglasses: ', allSunglasses)

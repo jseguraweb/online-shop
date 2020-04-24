@@ -8,7 +8,7 @@ import MiniCart from './MiniCart';
 
 const Glasses = () => {
 
-    const { setTotal, setCart, glasses } = useContext(ContextTotal);
+    const { setTotal, setCart, products } = useContext(ContextTotal);
 
 
     const addToCart = (e, item) => {
@@ -34,8 +34,7 @@ const Glasses = () => {
     };
 
 
-    const allViewglasses = glasses.filter(el => el.type === 'view').map(el => <Item key={el._id} properties={el} addToCart={addToCart} />);
-
+    const allViewglasses = products.filter(el => el.type === 'view').map(el => <Item key={el._id} properties={el} addToCart={addToCart} />);
 
     console.log('GLASSES RENDERING...', allViewglasses)
 

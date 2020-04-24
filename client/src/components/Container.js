@@ -12,15 +12,20 @@ export default function Container(props) {
     //glasses
     const [glasses, setGlasses] = useState(null)
 
-    async function getdb() {
+    async function getDB() {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
         try {
-            let DB = await fetch('http://localhost:4000/getdb');
-            console.log(DB);
-            let DBFinal = await DB.json();
-            console.log('DBFinal: ', DBFinal);
-            setCart(DBFinal.Cart);
-            setTotal(DBFinal.Cart.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2));
-            setGlasses(DBFinal.Products)
+            let response = await fetch('/', options);
+            let DB = await response.json();
+            console.log('DB: ', DB);
+            setCart(DB.cart);
+            setTotal(DB.cart.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2));
+            setGlasses(DB.products)
             /*      console.log(sunGlasses, cart ,total) */
         } catch (err) {
             console.log('ERROR!!: ', err);
@@ -28,7 +33,7 @@ export default function Container(props) {
     };
 
     useEffect(() => {
-        getdb()
+        getDB()
         /* console.log(sunGlasses, cart,setCart ,setTotal ,total,disabledButton, setDisabledButton) */
     }, []);
 

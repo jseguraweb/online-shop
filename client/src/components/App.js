@@ -1,16 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { ContextTotal } from "./Context"
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import '../styles/App.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlasses } from '@fortawesome/free-solid-svg-icons';
 import Cart from './Cart';
-import Container from "./Container"
 import Glasses from './Glasses';
 import Sunglasses from './Sunglasses';
 
 const App = () => {
+
+    const [products, setProducts] = useState(null);
+    const [cart, setCart] = useState(null);
+    const [total, setTotal] = useState(null)
+
+    const getDB = async () => {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        try {
+            let response = await fetch('/allproducts', options);
+            let DB = await response.json();
+            console.log('DB: ', DB);
+            setProducts(DB.products)
+            setCart(DB.cart);
+            // setTotal(DB.cart.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2));
+            /*      console.log(sunGlasses, cart ,total) */
+        } catch (err) {
+            console.log('ERROR!!: ', err);
+        }
+    };
+
+    console.log('PRODUCTS: ', products);
+    console.log('CART: ', cart);
+
+    useEffect(() => {
+        getDB();
+    }, [])
+
     return (
-        <Container>
+        <ContextTotal.Provider value={{ products, setProducts, cart, setCart, total, setTotal }}>
             <BrowserRouter>
                 <div className="app">
                     <header className="header">
@@ -19,7 +51,7 @@ const App = () => {
                     <main>
                         <div className="dividing-box">
                             <div className="glasses">
-                                <Link className="link-to-section" to="/glasses">
+                                <Link className="link-to-section" to="/eyeglasses">
                                     <div className="circle circle-view">
                                         <h2>GLASSES</h2>
                                     </div>
@@ -37,12 +69,12 @@ const App = () => {
                     </main>
                 </div>
                 <Switch>
-                    <Route path="/glasses" component={Glasses} />
+                    <Route path="/eyeglasses" component={Glasses} />
                     <Route path="/sunglasses" component={Sunglasses} />
                     <Route path="/cart" component={Cart} />
                 </Switch>
             </BrowserRouter>
-        </Container>
+        </ContextTotal.Provider>
     );
 }
 
