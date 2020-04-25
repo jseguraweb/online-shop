@@ -3,7 +3,7 @@ const Product = require('../models/product');
 const getSunGlasses = async (req, res, next) => {
     try {
         const sunglasses = await Product.find({ type: "sun" });
-        res.json({ success: true, eyeglasses: sunglasses });
+        res.json(sunglasses);
     } catch (error) {
         next(error);
     }

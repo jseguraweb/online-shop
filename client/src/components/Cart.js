@@ -10,29 +10,30 @@ const Cart = () => {
 
     const { cart, setCart, total, setTotal } = useContext(ContextTotal);
 
-    const removeItem = (item) => {
+    const removeItem = async (item) => {
         // console.log('IM PASSING THIS: ', item);
-
-        let itemId = cart.find(el => (el.itemAddedId === item.itemAddedId)).itemAddedId;
-        console.log('ITEM_ID: ', itemId);
-
-        setCart(cart.filter(el => el.itemAddedId !== item.itemAddedId));
-        setTotal(total - item.itemAddedPrice.toFixed(2));
+        let deletedItem = item;
+        // let itemId = cart.find(el => (el.itemAddedId === item.itemAddedId)).itemAddedId;
+        // console.log('ITEM_ID: ', itemId);
+        console.log(deletedItem);
+        // setCart(cart.filter(el => el.itemAddedId !== item.itemAddedId));
+        // setTotal(total - item.itemAddedPrice.toFixed(2));
 
         const options = {
             method: 'DELETE',
-            body: itemId
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(deletedItem)
         };
 
-        fetch(`http://localhost:4000/remove/${itemId}`, options)
-            .then(res => res.json())
-            .then(res1 => {
-                const response = res1.cart;
-                console.log('RESPONSE FROM SERVER:', response);
-                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2);
-                newTotal ? setTotal(newTotal) : setTotal(0);
-                setCart(response);
-            })
+        let response = await fetch('/cart', options);
+        let data = await response.json();
+
+        console.log('RESPONSE FROM SERVER:', data);
+        let newTotal = await data.reduce((acc, el) => acc += el.price * el.quantity, 0).toFixed(2);
+        await setTotal(newTotal);
+        await setCart(data);
     };
 
     const removeAllItems = () => {
@@ -54,10 +55,10 @@ const Cart = () => {
 
     const itemsInCart = cart && cart.map((el, i) => {
         return (
-            <li className="item-in-cart" key={i}>
-                <p>{el.itemAddedName} {`(${el.itemAddedQuantity}x)`}</p>
+            <li className="item-in-cart" key={el.name.concat(i.toString())}>
+                <p>{el.name} {`(${el.quantity}x)`}</p>
                 <p className="underscore"></p>
-                <p>{(el.itemAddedQuantity * el.itemAddedPrice).toFixed(2)}€ <FontAwesomeIcon className="remove-item" icon={faTimes} onClick={() => removeItem(el)} /></p>
+                <p>{(el.quantity * el.price).toFixed(2)}€ <FontAwesomeIcon className="remove-item" icon={faTimes} onClick={() => removeItem(el)} /></p>
             </li>
         )
     });
