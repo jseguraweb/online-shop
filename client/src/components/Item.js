@@ -3,9 +3,9 @@ import '../styles/Item.scss';
 
 const Item = ({ properties, addToCart }) => {
     // properties passed to create each card
-    const { _id, name, picture, price } = properties;
+    const { name, picture, price } = properties;
 
-    console.log('ITEM RENDERING...')
+    // console.log('ITEM RENDERING...')
 
     return (
         <div className="card">
@@ -20,7 +20,7 @@ const Item = ({ properties, addToCart }) => {
             <div className="face-two">
                 <div className="info">
                     <p>{price} €</p>
-                    <button className="active-button" onClick={(e) => { e.preventDefault(); addToCart(e, { _id }); }}>ADD TO CART</button>
+                    <button className="active-button" onClick={(e) => { e.preventDefault(); addToCart(e, { name }); }}>ADD TO CART</button>
                 </div>
             </div>
         </div>

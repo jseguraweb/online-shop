@@ -10,9 +10,9 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const Glasses = () => {
 
-    const { setTotal, setCart, products, getDB } = useContext(ContextTotal);
+    const { total, setTotal, setCart, products, getDB } = useContext(ContextTotal);
 
-    const addToCart = (e, item) => {
+    const addToCart = async (e, item) => {
         e.preventDefault();
         console.log('ADD TO CART IS RUNNING');
         const data = item;
@@ -23,15 +23,19 @@ const Glasses = () => {
             },
             body: JSON.stringify(data)
         };
-        fetch('/addtocart', options)
-            .then(res => res.json())
-            .then(res1 => {
-                const response = res1.cart;
-                console.log('RESPONSE FROM SERVER:', response);
-                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2);
-                setTotal(newTotal);
-                setCart(response);
-            })
+        try {
+            let response = await fetch('/cart', options);
+            let data = await response.json();
+            // const response = res1.cart;
+            console.log('RESPONSE FROM SERVER:', data);
+            console.log('TOTAL: ', total);
+            let newTotal = await data.reduce((acc, el) => acc += el.price * el.quantity, 0).toFixed(2);
+            console.log('NEW-TOTAL: ', newTotal);
+            await setTotal(newTotal);
+            await setCart(data);
+        } catch (error) {
+            console.log('ERROR in addToCart: ', error);
+        }
     };
 
     useEffect(() => {

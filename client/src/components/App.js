@@ -11,8 +11,8 @@ import Sunglasses from './Sunglasses';
 const App = () => {
 
     const [products, setProducts] = useState(null);
-    const [cart, setCart] = useState(null);
-    const [total, setTotal] = useState(null)
+    const [cart, setCart] = useState([]);
+    const [total, setTotal] = useState(0)
 
     const getDB = async () => {
         const options = {
@@ -24,13 +24,13 @@ const App = () => {
         try {
             let response = await fetch('/allproducts', options);
             let DB = await response.json();
-            console.log('DB: ', DB);
+            // console.log('DB: ', DB);
             setProducts(DB.products)
-            setCart(DB.cart);
+            // setCart(DB.cart);
             // setTotal(DB.cart.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2));
             /*      console.log(sunGlasses, cart ,total) */
-        } catch (err) {
-            console.log('ERROR!!: ', err);
+        } catch (error) {
+            console.log('ERROR in getDB: ', error);
         }
     };
 
