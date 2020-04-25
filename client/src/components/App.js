@@ -22,13 +22,18 @@ const App = () => {
             }
         };
         try {
+
             let response = await fetch('/allproducts', options);
             let DB = await response.json();
             // console.log('DB: ', DB);
-            setProducts(DB.products)
-            // setCart(DB.cart);
-            // setTotal(DB.cart.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2));
-            /*      console.log(sunGlasses, cart ,total) */
+            setProducts(DB.products);
+
+            let response2 = await fetch('/cart', options);
+            let data = await response2.json();
+            let newTotal = await data.reduce((acc, el) => acc += el.price * el.quantity, 0).toFixed(2);
+            setTotal(newTotal);
+            setCart(data);
+
         } catch (error) {
             console.log('ERROR in getDB: ', error);
         }

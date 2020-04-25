@@ -10,9 +10,6 @@ import Cart from './Cart';
 const MiniCart = () => {
 
     const { total } = useContext(ContextTotal);
-    // console.log('PRINT TOTAL: ', total);
-
-    // console.log('MINICART RENDERING...')
 
     return (
         <div className="minicart">

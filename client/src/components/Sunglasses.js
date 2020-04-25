@@ -22,15 +22,17 @@ const Sunglasses = () => {
             body: JSON.stringify(data)
         };
         try {
+
             let response = await fetch('/cart', options);
             let data = await response.json();
-            // const response = res1.cart;
             console.log('RESPONSE FROM SERVER:', data);
             console.log('TOTAL: ', total);
+
             let newTotal = await data.reduce((acc, el) => acc += el.price * el.quantity, 0).toFixed(2);
             console.log('NEW-TOTAL: ', newTotal);
             await setTotal(newTotal);
             await setCart(data);
+
         } catch (error) {
             console.log('ERROR in addToCart: ', error);
         }
