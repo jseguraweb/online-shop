@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ContextTotal } from './Context';
 import '../styles/Sunglasses.scss';
 import { Route } from 'react-router-dom';
@@ -8,7 +8,8 @@ import MiniCart from './MiniCart';
 
 const Sunglasses = () => {
 
-    const { products, setTotal, setCart } = useContext(ContextTotal)
+    const { products, setTotal, setCart, getDB } = useContext(ContextTotal);
+
     const addToCart = (e, item) => {
         e.preventDefault();
         const data = item;
@@ -19,7 +20,7 @@ const Sunglasses = () => {
             },
             body: JSON.stringify(data)
         };
-        fetch('http://localhost:4000/addtocart', options)
+        fetch('/addtocart', options)
             .then(res => res.json())
             .then(res1 => {
                 const response = res1.cart;
@@ -30,11 +31,9 @@ const Sunglasses = () => {
             })
     };
 
-
-    const allSunglasses = products.filter(el => el.type === 'sun').map(el => <Item key={el._id} properties={el} addToCart={addToCart} />);
-
-
-    // console.log('allsunglasses: ', allSunglasses)
+    useEffect(() => {
+        getDB()
+    }, []);
 
     return (
 
@@ -42,12 +41,14 @@ const Sunglasses = () => {
             <MiniCart />
             <section className="section-sunglasses">
                 {
-                    allSunglasses
+                    products ?
+                        products.filter(el => el.type === 'sun').map((el, i) => <Item key={el.type.concat(i.toString())} properties={el} addToCart={addToCart} />)
+                        :
+                        <p>loading</p>
                 }
             </section>
             <Route path="/" />
         </div>
-
     );
 }
 

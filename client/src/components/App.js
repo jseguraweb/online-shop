@@ -42,7 +42,7 @@ const App = () => {
     }, [])
 
     return (
-        <ContextTotal.Provider value={{ products, setProducts, cart, setCart, total, setTotal }}>
+        <ContextTotal.Provider value={{ products, setProducts, cart, setCart, total, setTotal, getDB }}>
             <BrowserRouter>
                 <div className="app">
                     <header className="header">
