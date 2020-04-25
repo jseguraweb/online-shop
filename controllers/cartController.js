@@ -76,7 +76,22 @@ const deleteOneItem = async (req, res, next) => {
 };
 
 const deleteAllItems = async (req, res, next) => {
+    try {
 
+        const updatedProducts = await Product.updateMany({}, { stock: 10 });
+        // console.log(updatedProducts);
+        // const productsList = await Product.find();
+        // console.log(productsList);
+
+        const updatedCart = await Cart.deleteMany({});
+        // console.log(updatedCart);
+        const cart = await Cart.find();
+        // console.log(cart);
+        res.json(cart);
+
+    } catch (error) {
+        next(error);
+    }
 };
 
 module.exports = { getCart, insertProductInTheCart, deleteOneItem, deleteAllItems };

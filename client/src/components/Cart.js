@@ -36,21 +36,19 @@ const Cart = () => {
         await setCart(data);
     };
 
-    const removeAllItems = () => {
+    const removeAllItems = async () => {
 
         const options = {
             method: 'DELETE'
         };
 
-        fetch('http://localhost:4000/removeall', options)
-            .then(res => res.json())
-            .then(res1 => {
-                const response = res1.cart;
-                console.log('RESPONSE FROM SERVER:', response);
-                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
-                setTotal(newTotal);
-                setCart(response);
-            })
+        let response = await fetch('/cart/clear', options);
+        let data = await response.json();
+        console.log(data);
+
+        console.log('RESPONSE FROM SERVER:', data);
+        setTotal(0);
+        setCart(data);
     };
 
     const itemsInCart = cart && cart.map((el, i) => {
