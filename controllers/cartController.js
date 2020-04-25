@@ -2,7 +2,7 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 const getCart = async (req, res, next) => {
-    const cart = await Cart.find()
+    const cart = await Cart.find();
     res.json(cart);
 };
 
