@@ -4,6 +4,8 @@ import '../styles/Glasses.scss';
 import { Route } from 'react-router-dom';
 import Item from './Item';
 import MiniCart from './MiniCart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 
 const Glasses = () => {
@@ -44,7 +46,9 @@ const Glasses = () => {
                     products ?
                         products.filter(el => el.type === 'view').map((el, i) => <Item key={el.type.concat(i.toString())} properties={el} addToCart={addToCart} />)
                         :
-                        <p>loading</p>
+                        <div className="loading-message">
+                            <p><FontAwesomeIcon icon={faSpinner} spin style={{ color: "rgb(7, 104, 104)" }} /> Loading...</p>
+                        </div>
                 }
             </section>
             <Route path="/" />

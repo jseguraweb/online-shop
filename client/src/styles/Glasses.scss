@@ -27,3 +27,20 @@
         padding: 1rem 10rem 5rem;
     }
 }
+
+.loading-message {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	text-align: center;
+
+	p {
+		font-size: 1.2rem;
+
+		@media screen and (min-width: 400px) {
+			font-size: 1.8rem;
+		}
+	}
+}
