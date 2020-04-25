@@ -40,9 +40,6 @@
 form {
     width: 100%;
     height: auto;
-    display: grid;
-    grid-template: repeat(3, 1fr) / repeat(4, 1fr);
-    grid-gap: 2rem 1rem;
     padding: 1rem 1rem 2rem;
     margin: 1rem 0;
 
@@ -83,6 +80,15 @@ form {
             left: 5px;
         }
     }
+}
+
+.data-container {
+
+    display: grid;
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+    grid-gap: 2rem 1rem;
+    padding: 1rem 1rem 2rem;
+    margin: 1rem 0;
 
     .first-name {
         grid-area: 1/1/2/3;
@@ -124,8 +130,24 @@ form {
         }  
     }
 
+    .city {
+        grid-area: 3/1/4/3;
+
+        &:after {
+            content: 'CITY';
+        }  
+    }
+
+    .country {
+        grid-area: 3/3/4/5;
+
+        &:after {
+            content: 'COUNTRY';
+        }  
+    }
+
     .submit-btn {
-        grid-area: 3/2/-1/4;
+        grid-area: 4/2/-1/4;
         
         #submit-btn {
             position: relative;
