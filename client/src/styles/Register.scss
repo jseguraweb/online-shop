@@ -10,32 +10,9 @@
     }
 }
 
-.registration-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-    .username,
-    .userpassword {
-        width: 47%;
-
-        &:after {
-            content: '';
-            position: absolute;
-            bottom: -22px;
-            left: 5px;
-        }
-    }
-
-    .username:after {
-        content: 'USERNAME'
-    }
-    .userpassword:after {
-        content: 'PASSWORD'
-    }
+.delivery-address {
+    margin: 2rem 0 0.5rem;
 }
-
 
 form {
     width: 100%;
@@ -78,6 +55,7 @@ form {
             position: absolute;
             bottom: -22px;
             left: 5px;
+            color: rgb(145, 145, 145);
         }
     }
 }
@@ -85,7 +63,7 @@ form {
 .data-container {
 
     display: grid;
-    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+    grid-template: repeat(5, 1fr) / repeat(4, 1fr);
     grid-gap: 2rem 1rem;
     padding: 1rem 1rem 2rem;
     margin: 1rem 0;
@@ -146,8 +124,28 @@ form {
         }  
     }
 
+    .username {
+        grid-area: 4/1/5/3;
+        font-weight: 600;
+        margin: 0.5rem 0;
+
+        &:after {
+            content: 'USERNAME';
+        }  
+    }
+
+    .userpassword {
+        grid-area: 4/3/5/5;
+        font-weight: 600;
+        margin: 0.5rem 0;
+
+        &:after {
+            content: 'PASSWORD';
+        }  
+    }
+
     .submit-btn {
-        grid-area: 4/2/-1/4;
+        grid-area: 5/2/-1/4;
         
         #submit-btn {
             position: relative;

@@ -7,9 +7,11 @@ const UserSchema = new Schema(
         surname: { type: String, required: true },
         address: { type: String, required: true },
         number: Number,
-        postcode: Number,
+        postcode: String,
         city: String,
-        country: String
+        country: String,
+        username: String,
+        password: String
     },
     {
         toObject: {
@@ -21,6 +23,6 @@ const UserSchema = new Schema(
     }
 );
 
-ProductSchema.virtual('complete-address').get(function () { return `${this.address} ${this.number}, ${this.postcode} ${this.city} (${this.country})` });
+UserSchema.virtual('complete-address').get(function () { return `${this.address} ${this.number}, ${this.postcode} ${this.city} (${this.country})` });
 
 module.exports = mongoose.model('User', UserSchema);
