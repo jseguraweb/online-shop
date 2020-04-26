@@ -1,5 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import '../styles/Register.scss';
+import { ContextRegistration } from './Context';
 
 const Register = () => {
 
@@ -12,6 +13,8 @@ const Register = () => {
     const [country, setCountry] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const { toDelivery, setToDelivery, userInformation, setUserInformation } = useContext(ContextRegistration);
 
     const handleSubmit = async () => {
         const userData = {
@@ -35,11 +38,18 @@ const Register = () => {
         const response = await fetch('/cart/register', options);
         const data = await response.json();
         console.log('RESPONSE DATA: ', data);
+        if (data.status === 'New user successfully registered') {
+            setUserInformation(data);
+            setToDelivery(true);
+        } else {
+            alert(data.status);
+            setToDelivery(false);
+        }
     }
 
     return (
         <Fragment>
-            <h4 className="delivery-address">Please insert your information:</h4>
+            <h4 className="info-title">Please insert your information:</h4>
             <form className="data-container">
                 <label htmlFor="firstName" className="first-name">
                     <input type="text" id="first-name" name="firstName" onChange={(e) => setFirstName(e.target.value)} required />

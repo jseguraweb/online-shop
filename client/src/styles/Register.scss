@@ -10,7 +10,7 @@
     }
 }
 
-.delivery-address {
+.info-title {
     margin: 2rem 0 0.5rem;
 }
 
@@ -153,7 +153,7 @@ form {
 
             &:active {
                 position: relative;
-                top: calc(1rem + 2px);
+                top: calc(2rem + 2px);
                 box-shadow: none;
                 background-color: rgb(160, 45, 0);
             }

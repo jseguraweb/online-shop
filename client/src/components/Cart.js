@@ -5,12 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import Register from './Register';
 import Login from './Login';
+import { ContextRegistration } from "./Context"
+import Delivery from './Delivery';
 
 const Cart = () => {
 
     const { cart, setCart, total, setTotal } = useContext(ContextTotal);
-    const [registration, setRegistration] = useState('not registered');
+    const [userInformation, setUserInformation] = useState({});
+    const [registration, setRegistration] = useState('login');
     const [loginBtn, setLoginBtn] = useState(true);
+
+    const [toDelivery, setToDelivery] = useState(false);
+    const [toPayment, setToPayment] = useState(false);
 
     const removeItem = async (item) => {
         // console.log('IM PASSING THIS: ', item);
@@ -63,9 +69,7 @@ const Cart = () => {
         )
     });
 
-    const toggleButton = () => {
-        setLoginBtn(!loginBtn);
-    }
+    console.log('toDelivery: ', toDelivery);
 
     return (
         <div className="cart-bk">
@@ -91,16 +95,25 @@ const Cart = () => {
 
                 <h4>To delivery details:</h4>
                 <div className="registration">
-                    <button className="active-button" className={loginBtn ? "active-button pressed-btn" : "active-button"} onClick={() => { toggleButton(); setRegistration('login') }}>LOG IN</button>
-                    <button className="active-button" className={!loginBtn ? "active-button pressed-btn" : "active-button"} onClick={() => { toggleButton(); setRegistration('register') }}>REGISTER</button>
+                    <button className={loginBtn ? "active-button pressed-btn" : "active-button"} onClick={() => { setLoginBtn(true); setRegistration('login') }}>LOG IN</button>
+                    <button className={!loginBtn ? "active-button pressed-btn" : "active-button"} onClick={() => { setLoginBtn(false); setRegistration('register') }}>REGISTER</button>
                 </div>
 
-                {
-                    registration === 'register' ?
-                        <Register />
-                        :
-                        <Login />
-                }
+                <ContextRegistration.Provider value={{ toDelivery, setToDelivery, toPayment, setToPayment, userInformation, setUserInformation }}>
+                    {
+                        toDelivery === false ?
+                            <Fragment>
+                                {
+                                    registration === 'login' ?
+                                        <Login />
+                                        :
+                                        <Register />
+                                }
+                            </Fragment>
+                            :
+                            <Delivery />
+                    }
+                </ContextRegistration.Provider>
             </section>
         </div>
     );

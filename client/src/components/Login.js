@@ -1,10 +1,13 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import '../styles/Login.scss';
+import { ContextRegistration } from './Context';
 
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const { toDelivery, setToDelivery, userInformation, setUserInformation } = useContext(ContextRegistration);
 
     const handleSubmit = async () => {
         const userData = {
@@ -21,6 +24,13 @@ const Login = () => {
         const response = await fetch('/cart/login', options);
         const data = await response.json();
         console.log('RESPONSE DATA: ', data);
+        if (data.status === 'Username and password correct') {
+            setUserInformation(data);
+            setToDelivery(true);
+        } else {
+            alert(data.status);
+            setToDelivery(false);
+        }
     }
 
     return (
