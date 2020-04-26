@@ -3,11 +3,11 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
     {
-        name: { type: String, required: true },
-        surname: { type: String, required: true },
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
         address: { type: String, required: true },
-        number: Number,
-        postcode: String,
+        addressNr: Number,
+        postCode: String,
         city: String,
         country: String,
         username: String,

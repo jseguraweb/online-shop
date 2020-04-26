@@ -89,7 +89,7 @@ const Cart = () => {
                     </ul>
                 </div>
 
-                <h4>Payment:</h4>
+                <h4>To delivery details:</h4>
                 <div className="registration">
                     <button className="active-button" className={loginBtn ? "active-button pressed-btn" : "active-button"} onClick={() => { toggleButton(); setRegistration('login') }}>LOG IN</button>
                     <button className="active-button" className={!loginBtn ? "active-button pressed-btn" : "active-button"} onClick={() => { toggleButton(); setRegistration('register') }}>REGISTER</button>

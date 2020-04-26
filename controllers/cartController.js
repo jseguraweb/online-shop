@@ -106,12 +106,15 @@ const login = async (req, res, next) => {
     try {
         if (userInDB) {
             if (userInDB.password === password) {
-                res.send('Alright, welcome!')
+                console.log('Alright, welcome!');
+                res.json({ status: 'Alright, welcome!' });
             } else {
-                res.send('Username or password incorrect')
+                console.log('Username or password incorrect');
+                res.json({ status: 'Username or password incorrect' });
             }
         } else {
-            res.send('Username or password incorrect')
+            console.log('Username or password incorrect');
+            res.json({ status: 'Username or password incorrect' });
         }
     } catch (error) {
         next(error)
@@ -122,11 +125,11 @@ const login = async (req, res, next) => {
 const register = async (req, res, next) => {
     const newUser = await new User(
         {
-            name: req.body.firstName,
-            surname: req.body.lastName,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             address: req.body.address,
-            number: req.body.addressNr,
-            postcode: req.body.postCode,
+            addressNr: req.body.addressNr,
+            postCode: req.body.postCode,
             city: req.body.city,
             country: req.body.country,
             username: req.body.username,
@@ -136,7 +139,7 @@ const register = async (req, res, next) => {
     await newUser.save();
     const users = await User.find();
     console.log(users);
-    res.json(users)
+    res.json({ status: users })
 };
 
 module.exports = { getCart, insertProductInTheCart, deleteOneItem, deleteAllItems, login, register };

@@ -144,12 +144,12 @@ form {
         }  
     }
 
-    .submit-btn {
+    .register-btn {
         grid-area: 5/2/-1/4;
         
-        #submit-btn {
+        #register-btn {
             position: relative;
-            top: 1rem;
+            top: 2rem;
 
             &:active {
                 position: relative;
