@@ -106,8 +106,8 @@ const login = async (req, res, next) => {
     try {
         if (userInDB) {
             if (userInDB.password === password) {
-                console.log('Alright, welcome!');
-                res.json({ status: 'Alright, welcome!' });
+                console.log('Username and password correct');
+                res.json({ status: 'Username and password correct', data: userInDB });
             } else {
                 console.log('Username or password incorrect');
                 res.json({ status: 'Username or password incorrect' });
@@ -117,29 +117,86 @@ const login = async (req, res, next) => {
             res.json({ status: 'Username or password incorrect' });
         }
     } catch (error) {
-        next(error)
+        next(error);
     }
 
 };
 
 const register = async (req, res, next) => {
-    const newUser = await new User(
-        {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            address: req.body.address,
-            addressNr: req.body.addressNr,
-            postCode: req.body.postCode,
-            city: req.body.city,
-            country: req.body.country,
-            username: req.body.username,
-            password: req.body.password
+    try {
+        if (!req.body.firstName.length > 0 ||
+            !req.body.lastName.length > 0 ||
+            !req.body.address.length > 0 ||
+            !req.body.addressNr.length > 0 ||
+            !req.body.postCode.length > 0 ||
+            !req.body.city.length > 0 ||
+            !req.body.country.length > 0 ||
+            !req.body.username.length > 0 ||
+            !req.body.password.length > 0) {
+
+            res.json({ status: 'There are uncompleted fields' });
+
+        } else {
+            const newUser = await new User(
+                {
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    address: req.body.address,
+                    addressNr: req.body.addressNr,
+                    postCode: req.body.postCode,
+                    city: req.body.city,
+                    country: req.body.country,
+                    username: req.body.username,
+                    password: req.body.password,
+                    firstNameDEL: req.body.firstName,
+                    lastNameDEL: req.body.lastName,
+                    addressDEL: req.body.address,
+                    addressNrDEL: req.body.addressNr,
+                    postCodeDEL: req.body.postCode,
+                    cityDEL: req.body.city,
+                    countryDEL: req.body.country
+                }
+            );
+            await newUser.save();
+            const users = await User.find(newUser);
+            res.json({ status: 'New user successfully registered', data: newUser });
         }
-    );
-    await newUser.save();
-    const users = await User.find();
-    console.log(users);
-    res.json({ status: users })
+    } catch (error) {
+        next(error);
+    }
 };
 
-module.exports = { getCart, insertProductInTheCart, deleteOneItem, deleteAllItems, login, register };
+const delivery = async (req, res, next) => {
+    console.log('DELIVERY: ', req.body);
+    try {
+        if (!req.body.firstName.length > 0 ||
+            !req.body.lastName.length > 0 ||
+            !req.body.address.length > 0 ||
+            !req.body.addressNr.length > 0 ||
+            !req.body.postCode.length > 0 ||
+            !req.body.city.length > 0 ||
+            !req.body.country.length > 0) {
+
+            res.json({ status: 'There are uncompleted fields' });
+
+        } else {
+            const { firstName } = req.body;
+            const newData = {
+                firstNameDEL: req.body.firstName,
+                lastNameDEL: req.body.lastName,
+                addressDEL: req.body.address,
+                addressNrDEL: req.body.addressNr,
+                postCodeDEL: req.body.postCode,
+                cityDEL: req.body.city,
+                countryDEL: req.body.country
+            }
+            const userUpdate = await User.findOneAndUpdate({ firstName }, newData);
+            const user = await User.find({ firstName });
+            res.json({ status: 'New delivery address registered', data: user });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { getCart, insertProductInTheCart, deleteOneItem, deleteAllItems, login, register, delivery };

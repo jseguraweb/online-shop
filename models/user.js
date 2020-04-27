@@ -11,7 +11,14 @@ const UserSchema = new Schema(
         city: String,
         country: String,
         username: String,
-        password: String
+        password: String,
+        firstNameDEL: String,
+        lastNameDEL: String,
+        addressDEL: String,
+        addressNrDEL: Number,
+        postCodeDEL: String,
+        cityDEL: String,
+        countryDEL: String
     },
     {
         toObject: {
