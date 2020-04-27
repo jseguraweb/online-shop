@@ -4,46 +4,58 @@ import { ContextRegistration } from './Context';
 
 const Register = () => {
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [address, setAddress] = useState('');
-    const [addressNr, setAddressNr] = useState('');
-    const [postCode, setPostCode] = useState('');
-    const [city, setCity] = useState('');
-    const [country, setCountry] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState(null);
+    const [lastName, setLastName] = useState(null);
+    const [address, setAddress] = useState(null);
+    const [addressNr, setAddressNr] = useState(null);
+    const [postCode, setPostCode] = useState(null);
+    const [city, setCity] = useState(null);
+    const [country, setCountry] = useState(null);
+    const [username, setUsername] = useState(null);
+    const [password, setPassword] = useState(null);
 
     const { toDelivery, setToDelivery, userInformation, setUserInformation } = useContext(ContextRegistration);
 
     const handleSubmit = async () => {
-        const userData = {
-            firstName: firstName,
-            lastName: lastName,
-            address: address,
-            addressNr: addressNr,
-            postCode: postCode,
-            city: city,
-            country: country,
-            username: username,
-            password: password
-        };
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        };
-        const response = await fetch('/cart/register', options);
-        const data = await response.json();
-        console.log('RESPONSE DATA: ', data);
-        if (data.status === 'New user successfully registered') {
-            setUserInformation(data);
-            setToDelivery(true);
+        if (firstName === null ||
+            lastName === null ||
+            address === null ||
+            addressNr === null ||
+            postCode === null ||
+            city === null ||
+            country === null ||
+            username === null ||
+            password === null) {
+            alert('Please complete all the fields')
         } else {
-            alert(data.status);
-            setToDelivery(false);
+            const userData = {
+                firstName: firstName,
+                lastName: lastName,
+                address: address,
+                addressNr: addressNr,
+                postCode: postCode,
+                city: city,
+                country: country,
+                username: username,
+                password: password
+            };
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            };
+            const response = await fetch('/cart/register', options);
+            const data = await response.json();
+            console.log('RESPONSE DATA: ', data);
+            if (data.status === 'New user successfully registered') {
+                setUserInformation(data);
+                setToDelivery(true);
+            } else {
+                alert(data.status);
+                setToDelivery(false);
+            }
         }
     }
 

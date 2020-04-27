@@ -4,32 +4,36 @@ import { ContextRegistration } from './Context';
 
 const Login = () => {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState(null);
+    const [password, setPassword] = useState(null);
 
     const { toDelivery, setToDelivery, userInformation, setUserInformation } = useContext(ContextRegistration);
 
     const handleSubmit = async () => {
-        const userData = {
-            username: username,
-            password: password
-        };
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        };
-        const response = await fetch('/cart/login', options);
-        const data = await response.json();
-        console.log('RESPONSE DATA: ', data);
-        if (data.status === 'Username and password correct') {
-            setUserInformation(data);
-            setToDelivery(true);
+        if (username === null || password === null) {
+            alert('Please complete the fields')
         } else {
-            alert(data.status);
-            setToDelivery(false);
+            const userData = {
+                username: username,
+                password: password
+            };
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            };
+            const response = await fetch('/cart/login', options);
+            const data = await response.json();
+            console.log('RESPONSE DATA: ', data);
+            if (data.status === 'Username and password correct') {
+                setUserInformation(data);
+                setToDelivery(true);
+            } else {
+                alert(data.status);
+                setToDelivery(false);
+            }
         }
     }
 

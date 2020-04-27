@@ -8,15 +8,16 @@ const Delivery = () => {
 
     console.log('userInformation: ', userInformation);
 
-    const [firstNameDEL, setFirstNameDEL] = useState('');
-    const [lastNameDEL, setLastNameDEL] = useState('');
-    const [addressDEL, setAddressDEL] = useState('');
-    const [addressNrDEL, setAddressNrDEL] = useState('');
-    const [postCodeDEL, setPostCodeDEL] = useState('');
-    const [cityDEL, setCityDEL] = useState('');
-    const [countryDEL, setCountryDEL] = useState('');
+    const [firstName, setFirstName] = useState(null);
+    const [lastName, setLastName] = useState(null);
+    const [address, setAddress] = useState(null);
+    const [addressNr, setAddressNr] = useState(null);
+    const [postCode, setPostCode] = useState(null);
+    const [city, setCity] = useState(null);
+    const [country, setCountry] = useState(null);
 
     const [deliveryAddress, setDeliveryAddress] = useState(true);
+
     const handleSubmitSameAddress = async () => {
 
         const options = {
@@ -31,32 +32,47 @@ const Delivery = () => {
         console.log('RESPONSE DATA: ', data);
     };
 
+
     const handleSubmitDifferentAddress = async () => {
-        const userData = {
-            firstName: firstNameDEL,
-            lastName: lastNameDEL,
-            address: addressDEL,
-            addressNr: addressNrDEL,
-            postCode: postCodeDEL,
-            city: cityDEL,
-            country: countryDEL
-        };
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        };
-        const response = await fetch('/cart/delivery', options);
-        const data = await response.json();
-        console.log('RESPONSE DATA: ', data);
-        if (data.status === 'Delivery Route responding') {
-            setUserInformation(data);
-            setToPayment(true);
+        if (firstName === null ||
+            lastName === null ||
+            address === null ||
+            addressNr === null ||
+            postCode === null ||
+            city === null ||
+            country === null) {
+            alert('Please complete all the fields');
         } else {
-            alert(data.status);
-            setToPayment(false);
+            const userData = [
+                userInformation.data,
+                {
+                    firstName: firstName,
+                    lastName: lastName,
+                    address: address,
+                    addressNr: addressNr,
+                    postCode: postCode,
+                    city: city,
+                    country: country
+                }
+            ];
+            console.log('userData: ', userData);
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            };
+            const response = await fetch('/cart/delivery/otheraddress', options);
+            const data = await response.json();
+            console.log('RESPONSE DATA: ', data);
+            if (data.status === 'New delivery address registered') {
+                setUserInformation(data);
+                setToPayment(true);
+            } else {
+                alert('Please review your information');
+                setToPayment(false);
+            }
         }
     };
 
@@ -94,25 +110,25 @@ const Delivery = () => {
                     :
                     <form className="delivery-data-container">
                         <label htmlFor="firstName" className="first-name">
-                            <input type="text" id="first-name-L" name="firstName" onChange={(e) => setFirstNameDEL(e.target.value)} required />
+                            <input type="text" id="first-name-L" name="firstName" onChange={(e) => setFirstName(e.target.value)} required />
                         </label>
                         <label htmlFor="lastName" className="second-name">
-                            <input type="text" id="second-name-L" name="lastName" onChange={(e) => setLastNameDEL(e.target.value)} required />
+                            <input type="text" id="second-name-L" name="lastName" onChange={(e) => setLastName(e.target.value)} required />
                         </label>
                         <label htmlFor="address" className="address">
-                            <input type="text" id="address-L" name="address" onChange={(e) => setAddressDEL(e.target.value)} required />
+                            <input type="text" id="address-L" name="address" onChange={(e) => setAddress(e.target.value)} required />
                         </label>
                         <label htmlFor="addressNr" className="address-nr">
-                            <input type="number" id="address-nr-L" name="addressNr" onChange={(e) => setAddressNrDEL(e.target.value)} required />
+                            <input type="number" id="address-nr-L" name="addressNr" onChange={(e) => setAddressNr(e.target.value)} required />
                         </label>
                         <label htmlFor="postCode" className="address-post">
-                            <input type="text" id="address-post-L" name="postCode" onChange={(e) => setPostCodeDEL(e.target.value)} required />
+                            <input type="text" id="address-post-L" name="postCode" onChange={(e) => setPostCode(e.target.value)} required />
                         </label>
                         <label htmlFor="city" className="city">
-                            <input type="text" id="city-L" name="city" onChange={(e) => setCityDEL(e.target.value)} required />
+                            <input type="text" id="city-L" name="city" onChange={(e) => setCity(e.target.value)} required />
                         </label>
                         <label htmlFor="country" className="country">
-                            <input type="text" id="country-L" name="country" onChange={(e) => setCountryDEL(e.target.value)} required={true} />
+                            <input type="text" id="country-L" name="country" onChange={(e) => setCountry(e.target.value)} required />
                         </label>
                         <label htmlFor="" className="delivery-btn-L">
                             <input type="submit" value="TO PAYMENT" id="delivery-btn-L" className="active-button" onClick={(e) => { e.preventDefault(); handleSubmitDifferentAddress() }} />
