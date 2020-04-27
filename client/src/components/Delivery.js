@@ -30,6 +30,12 @@ const Delivery = () => {
         const response = await fetch('/cart/delivery', options);
         const data = await response.json();
         console.log('RESPONSE DATA: ', data);
+        if (data.status === 'Item will be sent to the invoice address') {
+            setToPayment(true);
+        } else {
+            alert('Please review your information');
+            setToPayment(false);
+        }
     };
 
 
