@@ -13,6 +13,7 @@ const eyeGlassesRoute = require('./routes/eyeGlassesRoute');
 const sunGlassesRoute = require('./routes/sunGlassesRoute');
 const cartRoute = require('./routes/cartRoute');
 const profileRoute = require('./routes/profileRoute');
+const paymentRoute = require('./routes/paymentRoute');
 
 app.use(express.json());
 app.use('/', indexRoute);
@@ -20,6 +21,7 @@ app.use('/eyeglasses', eyeGlassesRoute);
 app.use('/sunglasses', sunGlassesRoute);
 app.use('/cart', cartRoute);
 app.use('/profile', profileRoute);
+app.use('/payment', paymentRoute);
 
 app.use((err, req, res, next) => {
     res.json({ status: err.status, err: err.message });

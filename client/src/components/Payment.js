@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import '../styles/Payment.scss';
 import { ContextTotal } from './Context';
 
-const Payment = () => {
+const Payment = ({ userInformation }) => {
 
     const [method, setMethod] = useState('paypal');
     const { total } = useContext(ContextTotal);
@@ -24,6 +24,11 @@ const Payment = () => {
         }
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert('PAYMENT DONE')
+    }
+
     return (
         <div className="payment-container">
             <p className="total-payment">TOTAL: {total}€</p>
@@ -42,7 +47,7 @@ const Payment = () => {
 
                         : method === 'credit-card' ?
 
-                            <div className="credit-card-container">
+                            <form className="credit-card-container">
                                 <label htmlFor="cardholder" className="cardholder">
                                     <input type="text" name="cardholder" />
                                 </label>
@@ -85,11 +90,20 @@ const Payment = () => {
                                 <label htmlFor="cvv" className="cvv">
                                     <input type="number" min="001" max="999" name="cvv" />
                                 </label>
-                            </div>
+                                <input className="active-button payment-btn" type="submit" onClick={(e) => handleSubmit(e)} value="PAY" />
+                            </form>
 
                             :
 
-                            <p>Cash on delivery payment</p>
+                            <div className="cash-container">
+                                <h5>IMPORTANT INFORMATION</h5>
+                                <p>In the next 24 hours we will send you an invoice to <strong>{userInformation.data.email}</strong></p>
+                                <p>We will also send you an email with the delivery details and a return form as soon as the package leaves our warehouse.</p>
+                                <p>Please proceed with the payment once you've received your order.</p>
+                                <p>You will have 14 days after the delivery to complete the payment.</p>
+
+                                <input className="active-button payment-btn" type="submit" onClick={(e) => handleSubmit(e)} value="PAY" />
+                            </div>
                 }
             </div>
         </div>

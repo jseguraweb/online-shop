@@ -12,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.9.10"
+    "mongoose": "^5.9.10",
+    "mongoose-unique-validator": "^2.0.3",
+    "paypal-rest-sdk": "^2.0.0-rc.2"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",

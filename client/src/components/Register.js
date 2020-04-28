@@ -11,6 +11,7 @@ const Register = () => {
     const [postCode, setPostCode] = useState(null);
     const [city, setCity] = useState(null);
     const [country, setCountry] = useState(null);
+    const [email, setEmail] = useState(null);
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
 
@@ -24,6 +25,7 @@ const Register = () => {
             postCode === null ||
             city === null ||
             country === null ||
+            email === null ||
             username === null ||
             password === null) {
             alert('Please complete all the fields')
@@ -36,6 +38,7 @@ const Register = () => {
                 postCode: postCode,
                 city: city,
                 country: country,
+                email: email,
                 username: username,
                 password: password
             };
@@ -83,6 +86,9 @@ const Register = () => {
                 </label>
                 <label htmlFor="country" className="country">
                     <input type="text" id="country" name="country" onChange={(e) => setCountry(e.target.value)} required />
+                </label>
+                <label htmlFor="email" className="email">
+                    <input type="text" id="email" name="email" onChange={(e) => setEmail(e.target.value)} required />
                 </label>
                 <label htmlFor="username" className="username">
                     <input type="text" id="username" name="username" onChange={(e) => setUsername(e.target.value)} required />

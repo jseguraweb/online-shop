@@ -17,7 +17,7 @@ const Cart = () => {
     const [loginBtn, setLoginBtn] = useState(true);
 
     const [toDelivery, setToDelivery] = useState(false);
-    const [toPayment, setToPayment] = useState(true);
+    const [toPayment, setToPayment] = useState(false);
 
     const removeItem = async (item) => {
         // console.log('IM PASSING THIS: ', item);
@@ -79,7 +79,7 @@ const Cart = () => {
                 {
                     toPayment ?
 
-                        <Payment />
+                        <Payment userInformation={userInformation} />
 
                         :
 
