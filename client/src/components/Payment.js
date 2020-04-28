@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../styles/Payment.scss';
+import { ContextTotal } from './Context';
 
 const Payment = () => {
 
     const [method, setMethod] = useState('paypal');
-    // const [paypal, setPaypal] = useState(true);
-    // const [creditCard, setCreditCard] = useState(false);
-    // const [cash, setCash] = useState(false);
+    const { total } = useContext(ContextTotal);
 
     const togglePayment = (e) => {
         console.log(e);
@@ -27,6 +26,7 @@ const Payment = () => {
 
     return (
         <div className="payment-container">
+            <p className="total-payment">TOTAL: {total}€</p>
             <h4>Please select the payment method: (no data will be saved)</h4>
             <div className="payment-methods">
 
