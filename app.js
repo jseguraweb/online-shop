@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 4000;
+const { setCors } = require('./middlewares/security');
+require('dotenv').config();
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/mr-brilli-shop', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -16,6 +18,7 @@ const profileRoute = require('./routes/profileRoute');
 const paymentRoute = require('./routes/paymentRoute');
 
 app.use(express.json());
+app.use(setCors);
 app.use('/', indexRoute);
 app.use('/eyeglasses', eyeGlassesRoute);
 app.use('/sunglasses', sunGlassesRoute);

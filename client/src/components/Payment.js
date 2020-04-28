@@ -5,7 +5,7 @@ import { ContextTotal } from './Context';
 const Payment = ({ userInformation }) => {
 
     const [method, setMethod] = useState('paypal');
-    const { total } = useContext(ContextTotal);
+    const { cart, total } = useContext(ContextTotal);
 
     const togglePayment = (e) => {
         console.log(e);
@@ -24,9 +24,25 @@ const Payment = ({ userInformation }) => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e, method) => {
         e.preventDefault();
-        alert('PAYMENT DONE')
+        if (method === 'paypal') {
+            // alert('PAYPAL PAYMENT DONE');
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify({ cart: cart, total: total })
+            };
+            const response = await fetch('/payment/paypal', options);
+            const data = await response.json();
+            console.log('PAYPAL RESPONSE: ', data);
+            await window.location.assign(data);
+        } else {
+            alert('PAYMENT DONE');
+        }
     }
 
     return (
@@ -43,7 +59,10 @@ const Payment = ({ userInformation }) => {
             <div className="payment-details">
                 {
                     method === 'paypal' ?
-                        <p>PayPal Payment</p>
+                        <div className="paypal-container">
+                            <p>PayPal Payment</p>
+                            <input className="active-button payment-btn" type="submit" onClick={(e) => handleSubmit(e, 'paypal')} value="PAY" />
+                        </div>
 
                         : method === 'credit-card' ?
 
