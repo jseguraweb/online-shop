@@ -44,7 +44,7 @@ const Login = () => {
                     <input type="text" id="login-username" name="username" placeholder="username" onChange={(e) => setUsername(e.target.value)} required />
                 </label>
                 <label htmlFor="password" className="userpassword">
-                    <input type="text" id="login-password" name="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
+                    <input type="password" id="login-password" name="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
                 </label>
                 <label htmlFor="" className="submit-btn">
                     <input type="submit" value="LOG IN" id="login-btn" className="active-button" onClick={(e) => { e.preventDefault(); handleSubmit() }} />

@@ -45,12 +45,14 @@ const Payment = ({ userInformation, setCartAndTotal }) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ cart: cart, total: total })
+                body: JSON.stringify({ cart: cart, total: total }),
+                mode: 'no-cors'
             };
             const response = await fetch('/payment/paypal', options);
-            const data = await response.json();
-            console.log('PAYPAL RESPONSE: ', data);
-            await window.location.assign(data);
+            console.log(' RESPONSE: ', response);
+
+            // const data = await response.json();
+            // await window.location.assign(data);
 
         } else if (method === 'credit-card') {
 

@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const port = process.env.PORT || 4000;
 const { setCors } = require('./middlewares/security');
 require('dotenv').config();
@@ -17,6 +18,8 @@ const cartRoute = require('./routes/cartRoute');
 const profileRoute = require('./routes/profileRoute');
 const paymentRoute = require('./routes/paymentRoute');
 
+
+app.use(express.static(path.resolve(__dirname, 'client')))
 app.use(express.json());
 app.use(setCors);
 app.use('/', indexRoute);
