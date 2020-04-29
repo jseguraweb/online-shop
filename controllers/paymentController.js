@@ -21,8 +21,8 @@ const paypalPayment = async (req, res, next) => {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:4000/payment/paypal/success",
-            "cancel_url": "http://localhost:4000/payment/paypal/cancel"
+            "return_url": "http://localhost:3000/cart",
+            "cancel_url": "http://localhost:3000/cart"
         },
         "transactions": [{
             "item_list": {
@@ -50,6 +50,7 @@ const paypalPayment = async (req, res, next) => {
             for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === 'approval_url') {
                     res.json(payment.links[i].href);
+                    // res.redirect(payment.links[i].href);
                 }
             }
         }
@@ -57,10 +58,8 @@ const paypalPayment = async (req, res, next) => {
     });
 };
 
-const paymentSuccess = (req, res, next) => {
-    res.send('Thank you for your purchase');
+const paypalDone = (req, res, next) => {
+    res.send('Alright! Thank you for your purchase');
 };
 
-const paymentCancel = (req, res, next) => res.send('Sorry, the payment was cancelled');
-
-module.exports = { payment, paypalPayment, paymentSuccess, paymentCancel };
+module.exports = { payment, paypalPayment, paypalDone };
