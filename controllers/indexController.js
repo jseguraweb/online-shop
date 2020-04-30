@@ -3,6 +3,7 @@ const Cart = require('../models/cart');
 const path = require('path');
 
 const getIndex = (req, res, next) => {
+    console.log('SERVER IS WORKING');
     res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
 };
 

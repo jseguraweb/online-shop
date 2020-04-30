@@ -48,7 +48,7 @@ const Payment = ({ userInformation, setCartAndTotal }) => {
                 body: JSON.stringify({ cart: cart, total: total }),
                 mode: 'no-cors'
             };
-            const response = await fetch('/payment/paypal', options);
+            const response = await fetch('https://mr-brilli-shop.herokuapp.com/payment/paypal', options);
             console.log(' RESPONSE: ', response);
 
             const data = await response.json();
@@ -71,7 +71,7 @@ const Payment = ({ userInformation, setCartAndTotal }) => {
                     setLoading(false);
                     setTimeout(() => {
                         alert('PAYMENT DONE');
-                        window.location.assign('http://localhost:3000');
+                        window.location.assign('https://mr-brilli-shop.herokuapp.com/');
                     }, 50);
                 }, 2000);
             }
@@ -82,7 +82,7 @@ const Payment = ({ userInformation, setCartAndTotal }) => {
                 setLoading(false);
                 setTimeout(() => {
                     alert('ORDER COMPLETED');
-                    window.location.assign('http://localhost:3000');
+                    window.location.assign('https://mr-brilli-shop.herokuapp.com/');
                 }, 50);
             }, 2000);
         }
