@@ -25,7 +25,7 @@ const Glasses = () => {
         };
         try {
 
-            let response = await fetch('https://mr-brilli-shop.herokuapp.com/cart', options);
+            let response = await fetch('/cart', options);
             let data = await response.json();
             console.log('RESPONSE FROM SERVER:', data);
             console.log('TOTAL: ', total);

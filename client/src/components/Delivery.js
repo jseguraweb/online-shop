@@ -27,7 +27,7 @@ const Delivery = () => {
             },
             body: JSON.stringify(userInformation)
         };
-        const response = await fetch('https://mr-brilli-shop.herokuapp.com/cart/delivery', options);
+        const response = await fetch('/cart/delivery', options);
         const data = await response.json();
         console.log('RESPONSE DATA: ', data);
         if (data.status === 'Item will be sent to the invoice address') {

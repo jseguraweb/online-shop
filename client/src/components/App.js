@@ -23,7 +23,7 @@ const App = () => {
         };
         try {
 
-            let response = await fetch('https://mr-brilli-shop.herokuapp.com/allproducts', options);
+            let response = await fetch('/allproducts', options);
             let DB = await response.json();
             // console.log('DB: ', DB);
             setProducts(DB.products);
