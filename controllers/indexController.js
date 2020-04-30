@@ -2,9 +2,9 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 const path = require('path');
 
-// const getIndex = (req, res, next) => {
-//     res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
-// };
+const getIndex = (req, res, next) => {
+    res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
+};
 
 const getAllProducts = async (req, res, next) => {
     try {
@@ -16,5 +16,4 @@ const getAllProducts = async (req, res, next) => {
     }
 };
 
-// module.exports = { getIndex, getAllProducts };
-module.exports = { getAllProducts };
+module.exports = { getIndex, getAllProducts };
