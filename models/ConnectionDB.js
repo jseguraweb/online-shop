@@ -5,7 +5,7 @@ const LOCAL = process.env.LOCAL;
 
 const connectDB = async () => {
     await mongoose.connect(URI || LOCAL, { useNewUrlParser: true, useUnifiedTopology: true });
-    console.log('DB connected...');
+    await mongoose.connection.on('connected', () => console.log('DB connected...'));
 };
 
 module.exports = connectDB;
