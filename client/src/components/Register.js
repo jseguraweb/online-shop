@@ -94,7 +94,7 @@ const Register = () => {
                     <input type="text" id="username" name="username" onChange={(e) => setUsername(e.target.value)} required />
                 </label>
                 <label htmlFor="password" className="userpassword">
-                    <input type="text" id="userpassword" name="password" onChange={(e) => setPassword(e.target.value)} required />
+                    <input type="password" id="userpassword" name="password" onChange={(e) => setPassword(e.target.value)} required />
                 </label>
                 <label htmlFor="" className="register-btn">
                     <input type="submit" value="REGISTER" id="register-btn" className="active-button" onClick={(e) => { e.preventDefault(); handleSubmit() }} />

@@ -5,11 +5,18 @@ const port = process.env.PORT || 4000;
 const { setCors } = require('./middlewares/security');
 require('dotenv').config();
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/mr-brilli-shop', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.on('error', (err) => console.log(err));
-mongoose.connection.on('open', () => console.log('database connected'));
-mongoose.set('useFindAndModify', false);
+// DEVELOPMENT:
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://127.0.0.1:27017/mr-brilli-shop', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connection.on('error', (err) => console.log(err));
+// mongoose.connection.on('open', () => console.log('database connected'));
+// mongoose.set('useFindAndModify', false);
+
+// PRODUCTION:
+
+const connectDB = require('./models/ConnectionDB');
+
+connectDB();
 
 const indexRoute = require('./routes/indexRoute');
 const eyeGlassesRoute = require('./routes/eyeGlassesRoute');

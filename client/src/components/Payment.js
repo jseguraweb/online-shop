@@ -51,8 +51,8 @@ const Payment = ({ userInformation, setCartAndTotal }) => {
             const response = await fetch('/payment/paypal', options);
             console.log(' RESPONSE: ', response);
 
-            // const data = await response.json();
-            // await window.location.assign(data);
+            const data = await response.json();
+            await window.location.assign(data);
 
         } else if (method === 'credit-card') {
 
