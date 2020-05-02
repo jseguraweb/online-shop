@@ -21,8 +21,8 @@ const paypalPayment = async (req, res, next) => {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:3000/",
-            "cancel_url": "http://localhost:3000/cart"
+            "return_url": "https://mr-brilli-shop.herokuapp.com/",
+            "cancel_url": "https://mr-brilli-shop.herokuapp.com/cart"
         },
         "transactions": [{
             "item_list": {
@@ -49,8 +49,8 @@ const paypalPayment = async (req, res, next) => {
         } else {
             for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === 'approval_url') {
-                    res.json(payment.links[i].href);
-                    // res.redirect(payment.links[i].href);
+                    // res.json(payment.links[i].href);
+                    res.redirect(payment.links[i].href);
                 }
             }
         }
