@@ -1,6 +1,6 @@
 ![](/screenshots/screenshot-logo.png)
 
-# <a href="https://mr-brilli-shop.herokuapp.com/">Mr Brilli Onlie Shop</a>
+# <a href="https://mr-brilli-shop.herokuapp.com/">Mr Brilli Online Shop</a>
 
 > React.JS + Node.JS + MongoDB Project: create an online shop fetching and storing the data from/in a MongoDB database.
 
