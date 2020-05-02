@@ -24,7 +24,7 @@ const Login = () => {
                 },
                 body: JSON.stringify(userData)
             };
-            const response = await fetch('/cart/login', options);
+            const response = await fetch('https://mr-brilli-shop.herokuapp.com/cart/login', options);
             const data = await response.json();
             console.log('RESPONSE DATA: ', data);
             if (data.status === 'Username and password correct') {

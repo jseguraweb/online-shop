@@ -48,10 +48,11 @@ const Payment = ({ userInformation, setCartAndTotal }) => {
                 body: JSON.stringify({ cart: cart, total: total }),
                 mode: 'no-cors'
             };
-            const response = await fetch('/payment/paypal', options);
+            const response = await fetch('https://mr-brilli-shop.herokuapp.com/payment/paypal', options);
             console.log(' RESPONSE: ', response);
 
             const data = await response.json();
+            console.log(' RESPONSE: ', data);
             await window.location.assign(data);
 
         } else if (method === 'credit-card') {

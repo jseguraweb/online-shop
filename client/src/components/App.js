@@ -23,7 +23,7 @@ const App = () => {
         };
         try {
 
-            let response = await fetch('/allproducts', options);
+            let response = await fetch('https://mr-brilli-shop.herokuapp.com/allproducts', options);
             let DB = await response.json();
             // console.log('DB: ', DB);
             setProducts(DB.products);
@@ -74,9 +74,9 @@ const App = () => {
                     </main>
                 </div>
                 <Switch>
-                    <Route path="/eyeglasses" component={Glasses} />
-                    <Route path="/sunglasses" component={Sunglasses} />
-                    <Route path="/cart" component={Cart} />
+                    <Route path="https://mr-brilli-shop.herokuapp.com/eyeglasses" component={Glasses} />
+                    <Route path="https://mr-brilli-shop.herokuapp.com/sunglasses" component={Sunglasses} />
+                    <Route path="https://mr-brilli-shop.herokuapp.com/cart" component={Cart} />
                 </Switch>
             </BrowserRouter>
         </ContextTotal.Provider>

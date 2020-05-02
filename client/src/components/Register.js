@@ -49,7 +49,7 @@ const Register = () => {
                 },
                 body: JSON.stringify(userData)
             };
-            const response = await fetch('/cart/register', options);
+            const response = await fetch('https://mr-brilli-shop.herokuapp.com/cart/register', options);
             const data = await response.json();
             console.log('RESPONSE DATA: ', data);
             if (data.status === 'New user successfully registered') {

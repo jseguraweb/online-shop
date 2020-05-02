@@ -25,7 +25,7 @@ const Sunglasses = () => {
         };
         try {
 
-            let response = await fetch('/cart', options);
+            let response = await fetch('https://mr-brilli-shop.herokuapp.com/cart', options);
             let data = await response.json();
             console.log('RESPONSE FROM SERVER:', data);
             console.log('TOTAL: ', total);
@@ -59,8 +59,8 @@ const Sunglasses = () => {
                         </div>
                 }
             </section>
-            <Route path="/eyeglasses" component={Glasses} />
-            <Route path="/" />
+            <Route path="https://mr-brilli-shop.herokuapp.com/eyeglasses" component={Glasses} />
+            <Route path="https://mr-brilli-shop.herokuapp.com/" />
         </div>
     );
 }

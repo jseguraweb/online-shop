@@ -36,7 +36,7 @@ const Cart = () => {
             body: JSON.stringify(deletedItem)
         };
 
-        let response = await fetch('/cart', options);
+        let response = await fetch('https://mr-brilli-shop.herokuapp.com/cart', options);
         let data = await response.json();
 
         console.log('RESPONSE FROM SERVER:', data);
@@ -51,7 +51,7 @@ const Cart = () => {
             method: 'DELETE'
         };
 
-        let response = await fetch('/cart/clear', options);
+        let response = await fetch('https://mr-brilli-shop.herokuapp.com/cart/clear', options);
         let data = await response.json();
         console.log(data);
 
