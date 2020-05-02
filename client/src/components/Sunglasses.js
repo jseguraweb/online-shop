@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { ContextTotal } from './Context';
 import '../styles/Sunglasses.scss';
-import { Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import Item from './Item';
 import MiniCart from './MiniCart';
+import Glasses from './Glasses';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faGlasses } from '@fortawesome/free-solid-svg-icons';
@@ -46,7 +47,7 @@ const Sunglasses = () => {
     return (
 
         <div className="sunglasses-bk">
-            <a className="active-button small-link-btn" href="/eyeglasses">watch <FontAwesomeIcon icon={faGlasses} /> viewglasses</a>
+            <Link className="active-button small-link-btn" to="/eyeglasses">watch <FontAwesomeIcon icon={faGlasses} /> viewglasses</Link>
             <MiniCart />
             <section className="section-sunglasses">
                 {
@@ -58,6 +59,7 @@ const Sunglasses = () => {
                         </div>
                 }
             </section>
+            <Route path="/eyeglasses" component={Glasses} />
             <Route path="/" />
         </div>
     );
