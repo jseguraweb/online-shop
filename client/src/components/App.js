@@ -74,9 +74,9 @@ const App = () => {
                     </main>
                 </div>
                 <Switch>
-                    <Route path="https://mr-brilli-shop.herokuapp.com/eyeglasses" component={Glasses} />
-                    <Route path="https://mr-brilli-shop.herokuapp.com/sunglasses" component={Sunglasses} />
-                    <Route path="https://mr-brilli-shop.herokuapp.com/cart" component={Cart} />
+                    <Route path="/eyeglasses" component={Glasses} />
+                    <Route path="/sunglasses" component={Sunglasses} />
+                    <Route path="/cart" component={Cart} />
                 </Switch>
             </BrowserRouter>
         </ContextTotal.Provider>

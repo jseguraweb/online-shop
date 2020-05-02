@@ -59,8 +59,8 @@ const Glasses = () => {
                         </div>
                 }
             </section>
-            <Route path="https://mr-brilli-shop.herokuapp.com/sunglasses" component={Sunglasses} />
-            <Route path="https://mr-brilli-shop.herokuapp.com/" />
+            <Route path="/sunglasses" component={Sunglasses} />
+            <Route path="/" />
         </div>
     );
 }
