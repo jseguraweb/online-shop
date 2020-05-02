@@ -58,7 +58,7 @@ const App = () => {
                             <div className="glasses">
                                 <Link className="link-to-section" to="/eyeglasses">
                                     <div className="circle circle-view">
-                                        <h2>GLASSES</h2>
+                                        <h2>VIEWGLASSES</h2>
                                     </div>
                                 </Link>
                             </div>

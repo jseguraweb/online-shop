@@ -6,6 +6,7 @@ import Item from './Item';
 import MiniCart from './MiniCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faGlasses } from '@fortawesome/free-solid-svg-icons';
 
 const Sunglasses = () => {
 
@@ -39,12 +40,13 @@ const Sunglasses = () => {
     };
 
     useEffect(() => {
-        getDB()
+        getDB();
     }, []);
 
     return (
 
         <div className="sunglasses-bk">
+            <a className="active-button small-link-btn" href="/eyeglasses">watch <FontAwesomeIcon icon={faGlasses} /> viewglasses</a>
             <MiniCart />
             <section className="section-sunglasses">
                 {

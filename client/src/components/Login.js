@@ -7,7 +7,7 @@ const Login = () => {
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
 
-    const { toDelivery, setToDelivery, userInformation, setUserInformation } = useContext(ContextRegistration);
+    const { setToDelivery, setUserInformation } = useContext(ContextRegistration);
 
     const handleSubmit = async () => {
         if (username === null || password === null) {

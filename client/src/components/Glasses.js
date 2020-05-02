@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ContextTotal } from './Context';
 import '../styles/Glasses.scss';
 import { Route } from 'react-router-dom';
@@ -6,6 +6,7 @@ import Item from './Item';
 import MiniCart from './MiniCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faGlasses } from '@fortawesome/free-solid-svg-icons';
 
 
 const Glasses = () => {
@@ -45,6 +46,7 @@ const Glasses = () => {
 
     return (
         <div className="glasses-bk">
+            <a className="active-button small-link-btn" href="/sunglasses">watch <FontAwesomeIcon icon={faGlasses} /> sunglasses</a>
             <MiniCart />
             <section className="section-glasses">
                 {

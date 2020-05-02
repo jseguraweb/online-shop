@@ -8,7 +8,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 const Payment = ({ userInformation, setCartAndTotal }) => {
 
     const [method, setMethod] = useState('paypal');
-    const { cart, setCart, total, setTotal } = useContext(ContextTotal);
+    const { cart, total } = useContext(ContextTotal);
 
     const [loading, setLoading] = useState(false);
 

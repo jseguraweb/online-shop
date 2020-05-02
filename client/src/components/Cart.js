@@ -110,7 +110,7 @@ const Cart = () => {
                                 toDelivery === false ?
                                     <div className="registration">
                                         <button className={loginBtn ? "active-button pressed-btn" : "active-button"} onClick={() => { setLoginBtn(true); setRegistration('login') }}>LOG IN</button>
-                                        <button className={!loginBtn ? "active-button pressed-btn" : "active-button"} onClick={() => { setLoginBtn(false); setRegistration('register') }}>REGISTER</button>
+                                        <button className={!loginBtn ? "active-button pressed-btn" : "active-button signin-btn"} onClick={() => { setLoginBtn(false); setRegistration('register') }}>SIGN IN</button>
                                     </div>
                                     :
                                     null
